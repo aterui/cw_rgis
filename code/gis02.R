@@ -89,23 +89,27 @@ ggplot() +
   geom_sf(data = sf_str)
 
 # exercise ----------------------------------------------------------------
-# 
-# ## SKIP EXERCISE 3!
-# 
-# ## Exercise 1
-# sf_str_as <- readRDS(here("data/sf_stream_as.rds"))
-# 
-# ## Exercise 2
-# ## - type your answer
-# ## CRS for sf_str_as:
-# ## CRS for sf_nc_county:
-# print(sf_str_as)
-# ptinr(sf_nc_county)
-# 
-# ## Exercise 4
-# 
-# ## Exercise 5
-# 
-# 
-# 
-# 
+
+## SKIP EXERCISE 3!
+
+## Exercise 1
+sf_str_as <- readRDS(here("data/sf_stream_as.rds"))
+
+## Exercise 2
+## - type your answer
+## CRS for sf_str_as:
+## CRS for sf_nc_county:
+print(sf_str_as)
+print(sf_nc_county)
+
+## Exercise 4
+sf_nc_as <- sf_nc_county %>% 
+  filter(county == "ashe")
+
+## Exercise 5
+ggplot() +
+  geom_sf(data = sf_nc_as) +
+  geom_sf(data = sf_str_as)
+
+
+
