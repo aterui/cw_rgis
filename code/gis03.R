@@ -107,4 +107,42 @@ ggplot() +
 
 # exercise ----------------------------------------------------------------
 
+## last output is points, not polygons!!
+
+## mapping
+sf_quakes <- readRDS("data/sf_quakes.rds")
+sf_nz <- readRDS("data/sf_nz.rds")
+
+mapview(sf_nz) + mapview(sf_quakes)
+
+## join
+sf_quakes_join <- st_join(x = sf_quakes,
+                         y = sf_nz)
+
+
+sf_quakes_nz <- sf_quakes_join %>% 
+  drop_na(fid)
+
+df_n <- sf_site_join %>% 
+  as_tibble() %>% 
+  group_by(county) %>% 
+  summarize(n = n())
+
+sf_n_site <- sf_site_join %>% 
+  left_join(df_n,
+            by = "county")
+
+sf_n10 <- sf_n_site %>% 
+  filter(n > 10)
+
+ggplot() +
+  geom_sf(data = sf_n_site,
+          color = "grey") +
+  geom_sf(data = sf_n10,
+          color = "salmon")
+
+
+
+
+
 
