@@ -60,6 +60,3 @@ st_distance(sf_ft_quakes_proj)
 ## Q4
 saveRDS(sf_quakes, 
         file = "data/sf_quakes.rds")
-
-
-
