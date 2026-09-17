@@ -21,5 +21,45 @@ mapview(sf_site)
 # export
 saveRDS(sf_site, "data/sf_finsync_nc.rds")
 
+# projection
+sf_ft_wgs <- sf_site %>% 
+  slice(c(1, 2))
+
+sf_ft_utm <- sf_ft_wgs %>% 
+  st_transform(crs = 32617)
+
+mapview(sf_ft_wgs)
+
+st_distance(sf_ft_utm)
+
+
+# exercise ----------------------------------------------------------------
+
+## Q1
+## latitude - lat
+## longitude - long
+df_quakes <- as_tibble(quakes)
+
+## Q2
+sf_quakes <- df_quakes %>% 
+  st_as_sf(coords = c("long", "lat"),
+           crs = 4326)
+  
+mapview(sf_quakes,
+        zcol = "mag")  
+
+## Q3
+sf_ft_quakes <- sf_quakes %>% 
+  slice(c(1, 2))
+  
+sf_ft_quakes_proj <- sf_ft_quakes %>% 
+  st_transform(crs = 32760)
+  
+st_distance(sf_ft_quakes_proj)
+
+## Q4
+saveRDS(sf_quakes, 
+        file = "data/sf_quakes.rds")
+
 
 
